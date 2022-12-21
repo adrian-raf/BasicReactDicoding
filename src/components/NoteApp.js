@@ -1,48 +1,41 @@
 import React, { Component } from 'react';
-import { getInitialData } from '../utils/data';
-import NoteAppHeader from './NoteAppHeader';
-import NoteInput from './NoteInput';
 
-export class NoteApp extends Component {
+import NoteAppBody from './NoteAppBody';
+import NoteAppHeader from './NoteAppHeader';
+
+class NoteApp extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: getInitialData(),
+      search: '',
     };
-
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
+    this.onSearchHandler = this.onSearchHandler.bind(this);
   }
 
-  onDeleteHandler(id) {
-    const catatan = this.state.notes.filter((note) => note.id !== id);
-    this.setState({ catatan });
-  }
-
-  onAddNoteHandler({ title, body, createdAt, archived }) {
-    this.setState((previous) => {
+  onSearchHandler(event) {
+    this.setState(() => {
       return {
-        catatan: [
-          ...previous.catatan,
-          {
-            id: +new Date(),
-            title,
-            body,
-            createdAt,
-            archived,
-          },
-        ],
+        search: event.target.value,
       };
     });
   }
 
   render() {
+    // const notes = this.state.notes.filter((note) =>
+    //   note.title.toLowerCase().includes(this.state.search.toLowerCase())
+    // );
+    // const enableNotes = notes.filter((note) => {
+    //   return note.archived === false;
+    // });
+    // const archivedNotes = notes.filter((note) => {
+    //   return note.archived === true;
+    // });
     return (
-      <div id="root">
+      <>
         <NoteAppHeader />
-        <NoteInput />
-      </div>
+        <NoteAppBody />
+      </>
     );
   }
 }

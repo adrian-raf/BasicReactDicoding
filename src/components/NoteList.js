@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import NoteItem from './NoteItem';
 
-class NoteList extends Component {
-  render() {
-    return <div>NoteList</div>;
-  }
+function NoteList({ notes, onDelete }) {
+  return (
+    <div className="note-list">
+      {notes.map((note) => (
+        <NoteItem key={note.id} id={note.id} onDelete={onDelete} {...note} />
+      ))}
+    </div>
+  );
 }
 
 export default NoteList;

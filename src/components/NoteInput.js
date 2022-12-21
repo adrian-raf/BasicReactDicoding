@@ -11,6 +11,7 @@ class NoteInput extends Component {
 
     this.onTitleChangeHandler = this.onTitleChangeHandler.bind(this);
     this.onBodyChangeHandler = this.onBodyChangeHandler.bind(this);
+    this.onSubmitEventHandler = this.onSubmitEventHandler.bind(this);
   }
 
   onTitleChangeHandler(event) {
@@ -30,6 +31,7 @@ class NoteInput extends Component {
 
   onSubmitEventHandler(event) {
     event.preventDefault();
+    this.props.addNote(this.state);
   }
 
   render() {
@@ -37,9 +39,9 @@ class NoteInput extends Component {
       <div className="note-input">
         <h2>Buat Catatan</h2>
         <form onSubmit={this.onSubmitEventHandler}>
-          <p class="note-input__title__char-limit">Sisa karakter: 50</p>
+          <p className="note-input__title__char-limit">Sisa karakter: 50</p>
           <input
-            class="note-input__title"
+            className="note-input__title"
             type="text"
             placeholder="Ini adalah judul ..."
             required
@@ -47,7 +49,7 @@ class NoteInput extends Component {
             onChange={this.onTitleChangeHandler}
           ></input>
           <textarea
-            class="note-input__body"
+            className="note-input__body"
             type="text"
             placeholder="Tuliskan catatanmu di sini ..."
             required
